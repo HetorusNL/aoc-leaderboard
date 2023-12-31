@@ -5,10 +5,10 @@ import {
   Outlet,
   Route,
   RouterProvider,
-  useParams,
 } from "react-router-dom";
 import Navbar from "./components/layout/Navbar";
 import About from "./components/pages/About";
+import Leaderboard from "./components/pages/Leaderboard";
 
 function RootNode() {
   return (
@@ -21,12 +21,6 @@ function RootNode() {
 
 function MainPage() {
   return <div>Click on one of the leaderboards to show them.</div>;
-}
-
-function Leaderboard() {
-  let params = useParams();
-  let leaderboard = params.leaderboard;
-  return <div>Rendering leaderboard: {leaderboard}</div>;
 }
 
 const router = createBrowserRouter(

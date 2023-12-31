@@ -1,8 +1,12 @@
 import React, { Fragment, useEffect, useState } from "react";
 import packageJson from "../../../package.json";
+import { apiClearCache } from "../utils/api";
 
 const About = () => {
   const [version, setVersion] = useState("loading build date/time...");
+  const [clearCacheResult, setClearCacheResult] = useState(
+    "no clear cache performed"
+  );
 
   useEffect(() => {
     fetch("/meta.json", { cache: "no-store" })
@@ -11,6 +15,15 @@ const About = () => {
         setVersion(meta.buildDateTime);
       });
   }, []);
+
+  const clearCache = async () => {
+    try {
+      const response = await apiClearCache();
+      setClearCacheResult(response.data.result);
+    } catch {
+      setClearCacheResult("failure");
+    }
+  };
 
   return (
     <Fragment>
@@ -27,6 +40,12 @@ const About = () => {
         <i>Build date/time (local timezone): {version}</i>
       </p>
       <br></br>
+      <div>
+        <div className="btn" onClick={() => clearCache()}>
+          Clear cache
+        </div>
+        Clear cache result: {clearCacheResult}
+      </div>
     </Fragment>
   );
 };
