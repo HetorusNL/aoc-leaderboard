@@ -1,0 +1,33 @@
+table {
+  display: block;
+  overflow-x: auto;
+}
+
+table,
+th,
+td {
+  /* two borders adjecent creates a 2px solid border */
+  border: 1px solid var(--primary-color);
+  border-spacing: 0;
+}
+
+table thead th:first-child,
+table tbody th {
+  position: sticky;
+  z-index: 2;
+  left: 0;
+}
+
+em {
+  color: #ffffff;
+  font-style: normal;
+  text-shadow: 0 0 5px #ffffff;
+}
+
+.day-1-color {
+  color: #9999cc;
+}
+
+.day-2-color {
+  color: #ffff66;
+}

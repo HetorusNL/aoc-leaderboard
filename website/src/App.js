@@ -14,7 +14,11 @@ function RootNode() {
   return (
     <>
       <Navbar />
-      <Outlet />
+      <div
+        style={{ fontFamily: "Source Code Pro, monospace", color: "#cccccc" }}
+      >
+        <Outlet />
+      </div>
     </>
   );
 }
@@ -28,7 +32,7 @@ const router = createBrowserRouter(
     <>
       <Route path="/" element={<RootNode />}>
         <Route index element={<MainPage />} />
-        <Route path=":leaderboard" element={<Leaderboard />} />
+        <Route path=":edition/:leaderboard" element={<Leaderboard />} />
         <Route path="about" element={<About />} />
       </Route>
     </>

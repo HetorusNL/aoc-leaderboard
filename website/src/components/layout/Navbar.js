@@ -14,9 +14,20 @@ const Navbar = () => {
   );
   const [menuOpen, setMenuOpen] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [edition, setEdition] = useState("");
 
   // monitor resize events and store the window width on a resize
   useEffect(() => {
+    // TODO: move below edition setting to somewhere global
+    // TODO: add page to change editions that modifies the global
+    // after the start of November, set the edition to the current year
+    // otherwise revert to the last year (already completed) edition
+    const currentDate = new Date(Date.now());
+    setEdition(
+      currentDate.getUTCMonth() >= 10
+        ? currentDate.getUTCFullYear()
+        : currentDate.getUTCFullYear() - 1
+    );
     setLoading(false);
     const handleResizeWindow = () =>
       setUseHamburgerMenu(window.innerWidth < hamburgerMenuMaxWidth);
@@ -26,8 +37,8 @@ const Navbar = () => {
 
   const links = [
     { to: "/", name: "Home" },
-    { to: "/1117050", name: "Messed Up" },
-    { to: "/782191", name: "Demcon" },
+    { to: `/${edition}/1117050`, name: "Messed Up" },
+    { to: `/${edition}/782191`, name: "Demcon" },
     { to: "/about", name: "About" },
   ];
 

@@ -4,9 +4,7 @@ import { apiClearCache } from "../utils/api";
 
 const About = () => {
   const [version, setVersion] = useState("loading build date/time...");
-  const [clearCacheResult, setClearCacheResult] = useState(
-    "no clear cache performed"
-  );
+  const [clearCacheResult, setClearCacheResult] = useState("not performed");
 
   useEffect(() => {
     fetch("/meta.json", { cache: "no-store" })
@@ -42,7 +40,7 @@ const About = () => {
       <br></br>
       <div>
         <div className="btn" onClick={() => clearCache()}>
-          Clear cache
+          Clear AoC API cache
         </div>
         Clear cache result: {clearCacheResult}
       </div>
