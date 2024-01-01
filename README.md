@@ -1,7 +1,10 @@
 # AoC Leaderboard
 
-// TODO
-Both the website and API are available as docker containers:
+AoC Leaderboard to view the private Advent of Code leaderboards.
+
+Both an API and a website is available. The API to query https://adventofcode.com for private leaderboard information, and the website to show the information for the private leaderboards.
+
+Both the API and website are available as docker containers:
 
 - https://hub.docker.com/r/hetorusnl/aoc-leaderboard-api
 - https://hub.docker.com/r/hetorusnl/aoc-leaderboard-website
@@ -15,12 +18,18 @@ The current API endpoint can be reached at: https://api.aoc.hetorus.nl/.
 ### Running the API
 
 Run the API using the docker container mentioned above.
+As the AoC API is passing the requests to the https://adventofcode.com website, a session token must be specified to use the AoC API.
+This session token can be extracted from the request header of requests made to https://adventofcode.com.
+The information is stored in the Cookie header and has the form of session='token'.
+The API docker image expects 'session' to be present in the environment with 'token' as value
 
 ### Example queries
 
 _Make sure to change the `api.aoc.hetorus.nl` domain name when running the API locally_
 
-// TODO
+The API exposes the endpoint: `/<edition>/<leaderboard>`.  
+Substitute `<edition>` with the year to request the leaderboard for.  
+And substitute `<leaderboard>` with the number of the private leaderboard to request.
 
 ## Website
 
@@ -38,16 +47,13 @@ Run the website using the docker container mentioned above.
 
 # if any of the below commands fail on permission errors, prefix them with sudo
 
-# remove yarn is previously present on the system
+# remove yarn if present on the system
 sudo apt remove yarn
 
 # make sure that node.js >= 16.10 is installed
 
 # enable corepack
 corepack enable
-
-# init a new project
-yarn init -2
 
 # update to the latest version
 yarn set version stable
@@ -86,4 +92,4 @@ This causes the CI/CD to create a tagged docker image for both the API and the w
 
 ## License
 
-MIT License, Copyright (c) 2023 Tim Klein Nijenhuis <tim@hetorus.nl>
+MIT License, Copyright (c) 2024 Tim Klein Nijenhuis <tim@hetorus.nl>

@@ -1,0 +1,6 @@
+# expose the website on HTTP port 8000
+:8000 {
+	root * /srv/website
+	try_files {path} /index.html
+	file_server
+}
