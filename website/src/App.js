@@ -9,6 +9,7 @@ import {
 import Navbar from "./components/layout/Navbar";
 import About from "./components/pages/About";
 import Leaderboard from "./components/pages/Leaderboard";
+import Editions from "./components/pages/Editions";
 
 function RootNode() {
   return (
@@ -33,6 +34,7 @@ const router = createBrowserRouter(
       <Route path="/" element={<RootNode />}>
         <Route index element={<MainPage />} />
         <Route path=":edition/:leaderboard" element={<Leaderboard />} />
+        <Route path="editions" element={<Editions />} />
         <Route path="about" element={<About />} />
       </Route>
     </>
