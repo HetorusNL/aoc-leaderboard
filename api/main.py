@@ -10,7 +10,7 @@ api = Flask(__name__)
 
 welcome_message = """
 <h1>Welcome to the AoC Leaderboard API!</h1>
-<br>
+<br />
 The API exposes the endpoint: `/&lt;edition&gt;/&lt;leaderboard&gt;`
 """
 

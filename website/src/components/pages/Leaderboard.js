@@ -1,20 +1,24 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { apiLeaderboard } from "../utils/api";
 import "../../aoc-style.css";
+import { AppContext } from "../context/app-context";
 
 const Leaderboard = () => {
   const params = useParams();
   const edition = params.edition;
   const leaderboard = params.leaderboard;
   const [data, setData] = useState(null);
+  const { loading, updateState } = useContext(AppContext);
 
   const NUM_DAYS = 25;
 
   useEffect(() => {
     console.log("firing useEffect");
     const fetchData = async () => {
+      updateState({ loading: true });
       const result = await apiLeaderboard(edition, leaderboard);
+      updateState({ loading: false });
       const apiData = result.data;
       if (apiData.data == null) {
         return;
@@ -23,7 +27,8 @@ const Leaderboard = () => {
       setData(aocData);
     };
     fetchData();
-  }, [leaderboard, edition]);
+    // eslint-disable-next-line
+  }, [leaderboard, edition]); // we don't want to add updateState to the dependency array
 
   const parsedLeaderboardData = () => {
     // convert the dictionary data to an array so we can sort it
@@ -92,41 +97,50 @@ const Leaderboard = () => {
   return (
     // steal the font and color used on the AoC website
     <>
-      {data ? (
-        // we have data, so render the leaderboard
-        <>
-          <div style={{ marginBottom: "1em" }}>
-            Showing leaderboard and completion times for AoC leaderboard{" "}
-            <em>{leaderboard}</em> and edition <em>{edition}</em>
-          </div>
-          <table>
-            <thead>
-              <tr>
-                <th>Username</th>
-                <th>Score</th>
-                <th>Stars</th>
-                {dayHeaders()}
-              </tr>
-            </thead>
-            <tbody>
-              {parsedLeaderboardData().map(([key, value]) => (
-                <tr key={key}>
-                  <th>
-                    <nobr>{value.name}</nobr>
-                  </th>
-                  <td>{value.local_score}</td>
-                  <td>{value.stars}</td>
-                  {dayRows(value.completion_day_level)}
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </>
-      ) : (
-        <div>
-          No leaderboard available for leaderboard <em>{leaderboard}</em> and
-          edition <em>{edition}</em>!
+      {loading ? (
+        <div style={{ marginBottom: "1em" }}>
+          Loading leaderboard and completion times for AoC leaderboard{" "}
+          <em>{leaderboard}</em> and edition <em>{edition}...</em>
         </div>
+      ) : (
+        <>
+          {data ? (
+            // we have data, so render the leaderboard
+            <>
+              <div style={{ marginBottom: "1em" }}>
+                Showing leaderboard and completion times for AoC leaderboard{" "}
+                <em>{leaderboard}</em> and edition <em>{edition}</em>
+              </div>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Username</th>
+                    <th>Score</th>
+                    <th>Stars</th>
+                    {dayHeaders()}
+                  </tr>
+                </thead>
+                <tbody>
+                  {parsedLeaderboardData().map(([key, value]) => (
+                    <tr key={key}>
+                      <th>
+                        <nobr>{value.name}</nobr>
+                      </th>
+                      <td>{value.local_score}</td>
+                      <td>{value.stars}</td>
+                      {dayRows(value.completion_day_level)}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </>
+          ) : (
+            <div>
+              No leaderboard available for leaderboard <em>{leaderboard}</em>{" "}
+              and edition <em>{edition}</em>!
+            </div>
+          )}
+        </>
       )}
     </>
   );

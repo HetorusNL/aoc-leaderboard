@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Menu from "react-burger-menu/lib/menus/slide";
 import { Link } from "react-router-dom";
 
 import { ReactComponent as Transceive } from "./transceive.svg";
 import { ReactComponent as Idle } from "./idle.svg";
 import "./Sidebar.css";
+import { AppContext } from "../context/app-context";
 
 const Navbar = () => {
   // switch to hamburger menu if the screen width is less than hamburgerMenuMaxWidth
@@ -13,30 +14,29 @@ const Navbar = () => {
     window.innerWidth < hamburgerMenuMaxWidth
   );
   const [menuOpen, setMenuOpen] = useState(false);
-  const [loading, setLoading] = useState(true);
-  const [edition, setEdition] = useState("");
+  const { edition, loading, updateState } = useContext(AppContext);
 
   // monitor resize events and store the window width on a resize
   useEffect(() => {
-    // TODO: move below edition setting to somewhere global
     // TODO: add page to change editions that modifies the global
     // after the start of November, set the edition to the current year
     // otherwise revert to the last year (already completed) edition
     const currentDate = new Date(Date.now());
-    setEdition(
+    const currentEdition =
       currentDate.getUTCMonth() >= 10
         ? currentDate.getUTCFullYear()
-        : currentDate.getUTCFullYear() - 1
-    );
-    setLoading(false);
+        : currentDate.getUTCFullYear() - 1;
+    updateState({ edition: currentEdition });
     const handleResizeWindow = () =>
       setUseHamburgerMenu(window.innerWidth < hamburgerMenuMaxWidth);
     window.addEventListener("resize", handleResizeWindow);
     return () => window.removeEventListener("resize", handleResizeWindow);
-  }, []);
+    // eslint-disable-next-line
+  }, []); // we don't want to add updateState to the dependency array
 
   const links = [
     { to: "/", name: "Home" },
+    { to: "/editions", name: "Editions" },
     { to: `/${edition}/1117050`, name: "Messed Up" },
     { to: `/${edition}/782191`, name: "Demcon" },
     { to: "/about", name: "About" },
@@ -65,7 +65,11 @@ const Navbar = () => {
           }}
         >
           <Link to="/">
-            <h1>Advent of Code Leaderboard</h1>
+            <h1>
+              {"{ "}
+              {edition}
+              {" }"} - Advent of Code Leaderboard
+            </h1>
           </Link>
           {loading ? (
             <Transceive

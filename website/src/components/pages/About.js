@@ -1,10 +1,12 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useContext, useEffect, useState } from "react";
 import packageJson from "../../../package.json";
 import { apiClearCache } from "../utils/api";
+import { AppContext } from "../context/app-context";
 
 const About = () => {
   const [version, setVersion] = useState("loading build date/time...");
   const [clearCacheResult, setClearCacheResult] = useState("not performed");
+  const { updateState } = useContext(AppContext);
 
   useEffect(() => {
     fetch("/meta.json", { cache: "no-store" })
@@ -16,8 +18,10 @@ const About = () => {
 
   const clearCache = async () => {
     try {
+      updateState({ loading: true });
       const response = await apiClearCache();
       setClearCacheResult(response.data.result);
+      updateState({ loading: false });
     } catch {
       setClearCacheResult("failure");
     }
@@ -30,14 +34,14 @@ const About = () => {
         This website shows the Advent of Code Leaderboards for the Messed Up and
         Demcon private leaderboards.
       </p>
-      <br></br>
+      <br />
       <p>
         <i>Version: {packageJson.version}</i>
       </p>
       <p>
         <i>Build date/time (local timezone): {version}</i>
       </p>
-      <br></br>
+      <br />
       <div>
         <div className="btn" onClick={() => clearCache()}>
           Clear AoC API cache
