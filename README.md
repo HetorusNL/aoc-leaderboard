@@ -117,7 +117,3 @@ This causes the CI/CD to create a tagged docker image for both the API and the w
 ## License
 
 MIT License, Copyright (c) 2024 Tim Klein Nijenhuis <tim@hetorus.nl>
-
-```
-
-```
