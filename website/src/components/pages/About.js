@@ -1,7 +1,7 @@
 import React, { Fragment, useContext, useEffect, useState } from "react";
 import packageJson from "../../../package.json";
 import { apiClearCache } from "../utils/api";
-import { AppContext } from "../context/app-context";
+import { AppContext } from "../context/context";
 
 const About = () => {
   const [version, setVersion] = useState("loading build date/time...");

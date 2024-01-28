@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { apiLeaderboard } from "../utils/api";
 import "../../aoc-style.css";
-import { AppContext } from "../context/app-context";
+import { AppContext } from "../context/context";
 
 const Leaderboard = () => {
   const params = useParams();

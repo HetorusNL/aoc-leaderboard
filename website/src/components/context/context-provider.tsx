@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { AppState, AppContext, defaultState } from "./app-context";
+import { AppState, AppContext, defaultState } from "./context";
 
 interface Props {
   children: React.ReactNode;
@@ -7,7 +7,7 @@ interface Props {
 
 export const AppContextProvider: React.FunctionComponent<Props> = (
   props: Props
-): JSX.Element => {
+): React.JSX.Element => {
   const [state, setState] = useState(defaultState);
 
   const updateState = (newState: Partial<AppState>) => {

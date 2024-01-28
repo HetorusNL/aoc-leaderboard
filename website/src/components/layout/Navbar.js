@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { ReactComponent as Transceive } from "./transceive.svg";
 import { ReactComponent as Idle } from "./idle.svg";
 import "./Sidebar.css";
-import { AppContext } from "../context/app-context";
+import { AppContext } from "../context/context";
 
 const Navbar = () => {
   // switch to hamburger menu if the screen width is less than hamburgerMenuMaxWidth
