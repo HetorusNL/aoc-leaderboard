@@ -88,30 +88,31 @@ If there are errors during `yarn start`, restart the editor to (re)load the type
 
 ### Run the development server
 
-Run the following command to run the dev server:
-`yarn start`
+Run the following command to run the dev server:  
+`yarn start`  
 This starts the development server on `localhost:3000`
 
 ### Run a build (without incrementing version number)
 
-Run the following command to build the application:
-`yarn build`
+Run the following command to build the application:  
+`yarn build`  
 This updates the version number (if changed in `package.json`) and builds the application
 
 ### Increment the version number of the website
 
-The Semantic Versioning, also known as "semver", is used:
-Version: `major.minor.patch`
+The Semantic Versioning, also known as "semver", is used:  
+Version: `major.minor.patch`  
 Run one of the following commands:
-`yarn release-patch` // increments the `patch` number of the version
-`yarn release-minor` // increments the `minor` number of the version
-`yarn release-major` // increments the `major` number of the version
+
+- `yarn release-patch` // increments the `patch` number of the version
+- `yarn release-minor` // increments the `minor` number of the version
+- `yarn release-major` // increments the `major` number of the version
 
 After creating the new version, add the changed files and create a commit.
 
-After creating a commit, make sure to create a tag with matching version number (e.g. matching `v${npm_package_version}`), and push this to the repository, e.g:
-`git tag -a vX.Y.Z -m "vX.Y.Z"`
-`git push --tags`
+After creating a commit, make sure to create a tag with matching version number (e.g. matching `v${npm_package_version}`), and push this to the repository, e.g:  
+`git tag -a vX.Y.Z -m "vX.Y.Z"`  
+`git push --tags`  
 This causes the CI/CD to create a tagged docker image for both the API and the website with this version number.
 
 ## License
