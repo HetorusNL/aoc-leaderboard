@@ -5,16 +5,17 @@ import { Link } from "react-router-dom";
 import { ReactComponent as Transceive } from "./transceive.svg";
 import { ReactComponent as Idle } from "./idle.svg";
 import "./Sidebar.css";
-import { AppContext } from "../context/app-context";
+import { AppContext } from "../context/context";
+import { setEdition } from "../context/actions";
 
 const Navbar = () => {
   // switch to hamburger menu if the screen width is less than hamburgerMenuMaxWidth
-  const hamburgerMenuMaxWidth = 775;
+  const hamburgerMenuMaxWidth = 950;
   const [useHamburgerMenu, setUseHamburgerMenu] = useState(
     window.innerWidth < hamburgerMenuMaxWidth
   );
   const [menuOpen, setMenuOpen] = useState(false);
-  const { edition, loading, updateState } = useContext(AppContext);
+  const { state, dispatch } = useContext(AppContext);
 
   // monitor resize events and store the window width on a resize
   useEffect(() => {
@@ -26,7 +27,7 @@ const Navbar = () => {
       currentDate.getUTCMonth() >= 10
         ? currentDate.getUTCFullYear()
         : currentDate.getUTCFullYear() - 1;
-    updateState({ edition: currentEdition });
+    dispatch(setEdition(currentEdition));
     const handleResizeWindow = () =>
       setUseHamburgerMenu(window.innerWidth < hamburgerMenuMaxWidth);
     window.addEventListener("resize", handleResizeWindow);
@@ -37,8 +38,8 @@ const Navbar = () => {
   const links = [
     { to: "/", name: "Home" },
     { to: "/editions", name: "Editions" },
-    { to: `/${edition}/1117050`, name: "Messed Up" },
-    { to: `/${edition}/782191`, name: "Demcon" },
+    { to: `/${state.edition}/1117050`, name: "Messed Up" },
+    { to: `/${state.edition}/782191`, name: "Demcon" },
     { to: "/about", name: "About" },
   ];
 
@@ -60,18 +61,19 @@ const Navbar = () => {
       <nav className="navbar bg-primary">
         <div
           style={{
-            paddingLeft: useHamburgerMenu ? "50px" : "0px",
+            paddingLeft: useHamburgerMenu ? "40px" : "0px",
             display: "flex",
+            minHeight: "52px",
           }}
         >
           <Link to="/">
-            <h1>
+            <p className="title">
               {"{ "}
-              {edition}
+              {state.edition}
               {" }"} - Advent of Code Leaderboard
-            </h1>
+            </p>
           </Link>
-          {loading ? (
+          {state.loading ? (
             <Transceive
               fill="limegreen"
               style={{ width: "40px", height: "40px", marginTop: "5px" }}

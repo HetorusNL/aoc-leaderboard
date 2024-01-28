@@ -90,6 +90,10 @@ ul {
   margin-bottom: 1rem;
 }
 
+.title {
+  font-size: 1.5rem;
+}
+
 .text-primary {
   color: var(--primary-color);
 }
@@ -473,6 +477,11 @@ table th {
 
   .lead {
     font-size: 1rem;
+  }
+
+  .title {
+    font-size: 1rem;
+    margin-top: 0.5rem;
   }
 
   /* Navbar */

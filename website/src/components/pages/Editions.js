@@ -1,12 +1,13 @@
 import { useContext } from "react";
-import { AppContext } from "../context/app-context";
+
+import { AppContext } from "../context/context";
 
 const Editions = () => {
-  const { edition } = useContext(AppContext);
+  const { state } = useContext(AppContext);
 
   return (
     <>
-      <p>Current edition: {edition}</p>
+      <p>Current edition: {state.edition}</p>
       <br />
       <p>
         <i>Under construction...</i>

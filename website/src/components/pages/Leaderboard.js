@@ -1,24 +1,26 @@
+import "../../aoc-style.css";
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+
 import { apiLeaderboard } from "../utils/api";
-import "../../aoc-style.css";
-import { AppContext } from "../context/app-context";
+import { AppContext } from "../context/context";
+import { setLoading } from "../context/actions";
 
 const Leaderboard = () => {
   const params = useParams();
   const edition = params.edition;
   const leaderboard = params.leaderboard;
   const [data, setData] = useState(null);
-  const { loading, updateState } = useContext(AppContext);
+  const { state, dispatch } = useContext(AppContext);
 
   const NUM_DAYS = 25;
 
   useEffect(() => {
     console.log("firing useEffect");
     const fetchData = async () => {
-      updateState({ loading: true });
+      dispatch(setLoading(true));
       const result = await apiLeaderboard(edition, leaderboard);
-      updateState({ loading: false });
+      dispatch(setLoading(false));
       const apiData = result.data;
       if (apiData.data == null) {
         return;
@@ -97,7 +99,7 @@ const Leaderboard = () => {
   return (
     // steal the font and color used on the AoC website
     <>
-      {loading ? (
+      {state.loading ? (
         <div style={{ marginBottom: "1em" }}>
           Loading leaderboard and completion times for AoC leaderboard{" "}
           <em>{leaderboard}</em> and edition <em>{edition}...</em>
