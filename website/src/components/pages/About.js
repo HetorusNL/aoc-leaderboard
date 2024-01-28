@@ -1,12 +1,12 @@
 import React, { Fragment, useContext, useEffect, useState } from "react";
 import packageJson from "../../../package.json";
 import { apiClearCache } from "../utils/api";
-import { AppContext } from "../context/context";
+import { Context } from "../context/context";
 
 const About = () => {
   const [version, setVersion] = useState("loading build date/time...");
   const [clearCacheResult, setClearCacheResult] = useState("not performed");
-  const { updateState } = useContext(AppContext);
+  const { updateState } = useContext(Context);
 
   useEffect(() => {
     fetch("/meta.json", { cache: "no-store" })

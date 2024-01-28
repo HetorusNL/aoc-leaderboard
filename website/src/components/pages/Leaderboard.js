@@ -2,14 +2,14 @@ import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { apiLeaderboard } from "../utils/api";
 import "../../aoc-style.css";
-import { AppContext } from "../context/context";
+import { Context } from "../context/context";
 
 const Leaderboard = () => {
   const params = useParams();
   const edition = params.edition;
   const leaderboard = params.leaderboard;
   const [data, setData] = useState(null);
-  const { loading, updateState } = useContext(AppContext);
+  const { loading, updateState } = useContext(Context);
 
   const NUM_DAYS = 25;
 

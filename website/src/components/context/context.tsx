@@ -1,15 +1,15 @@
 import React from "react";
 
-export interface AppState {
+export interface State {
   edition?: number;
   loading?: boolean;
-  updateState: (newState: Partial<AppState>) => void;
+  updateState: (newState: Partial<State>) => void;
 }
 
-export const defaultState: AppState = {
+export const defaultState: State = {
   edition: undefined,
   loading: false,
-  updateState: (newState?: Partial<AppState>) => {},
+  updateState: (newState?: Partial<State>) => {},
 };
 
-export const AppContext = React.createContext<AppState>(defaultState);
+export const Context = React.createContext<State>(defaultState);

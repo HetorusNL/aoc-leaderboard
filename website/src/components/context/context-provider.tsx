@@ -1,16 +1,16 @@
 import React, { useState } from "react";
-import { AppState, AppContext, defaultState } from "./context";
+import { State, Context, defaultState } from "./context";
 
 interface Props {
   children: React.ReactNode;
 }
 
-export const AppContextProvider: React.FunctionComponent<Props> = (
+export const ContextProvider: React.FunctionComponent<Props> = (
   props: Props
 ): React.JSX.Element => {
   const [state, setState] = useState(defaultState);
 
-  const updateState = (newState: Partial<AppState>) => {
+  const updateState = (newState: Partial<State>) => {
     console.log("updating state:");
     console.log(state);
     console.log("new state");
@@ -19,8 +19,8 @@ export const AppContextProvider: React.FunctionComponent<Props> = (
   };
 
   return (
-    <AppContext.Provider value={{ ...state, updateState }}>
+    <Context.Provider value={{ ...state, updateState }}>
       {props.children}
-    </AppContext.Provider>
+    </Context.Provider>
   );
 };

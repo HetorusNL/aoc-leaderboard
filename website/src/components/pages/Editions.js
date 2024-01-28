@@ -1,8 +1,8 @@
 import { useContext } from "react";
-import { AppContext } from "../context/context";
+import { Context } from "../context/context";
 
 const Editions = () => {
-  const { edition } = useContext(AppContext);
+  const { edition } = useContext(Context);
 
   return (
     <>

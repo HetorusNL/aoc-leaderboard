@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { ReactComponent as Transceive } from "./transceive.svg";
 import { ReactComponent as Idle } from "./idle.svg";
 import "./Sidebar.css";
-import { AppContext } from "../context/context";
+import { Context } from "../context/context";
 
 const Navbar = () => {
   // switch to hamburger menu if the screen width is less than hamburgerMenuMaxWidth
@@ -14,7 +14,7 @@ const Navbar = () => {
     window.innerWidth < hamburgerMenuMaxWidth
   );
   const [menuOpen, setMenuOpen] = useState(false);
-  const { edition, loading, updateState } = useContext(AppContext);
+  const { edition, loading, updateState } = useContext(Context);
 
   // monitor resize events and store the window width on a resize
   useEffect(() => {
