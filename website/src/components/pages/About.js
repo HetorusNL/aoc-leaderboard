@@ -1,12 +1,14 @@
 import React, { Fragment, useContext, useEffect, useState } from "react";
 import packageJson from "../../../package.json";
+
 import { apiClearCache } from "../utils/api";
-import { Context } from "../context/context";
+import { AppContext } from "../context/context";
+import { setLoading } from "../context/actions";
 
 const About = () => {
   const [version, setVersion] = useState("loading build date/time...");
   const [clearCacheResult, setClearCacheResult] = useState("not performed");
-  const { updateState } = useContext(Context);
+  const { dispatch } = useContext(AppContext);
 
   useEffect(() => {
     fetch("/meta.json", { cache: "no-store" })
@@ -18,10 +20,11 @@ const About = () => {
 
   const clearCache = async () => {
     try {
-      updateState({ loading: true });
+      dispatch(setLoading(true));
+      setClearCacheResult("clearing...");
       const response = await apiClearCache();
       setClearCacheResult(response.data.result);
-      updateState({ loading: false });
+      dispatch(setLoading(false));
     } catch {
       setClearCacheResult("failure");
     }

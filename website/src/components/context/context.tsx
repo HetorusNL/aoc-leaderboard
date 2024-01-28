@@ -1,15 +1,12 @@
 import React from "react";
 
-export interface State {
-  edition?: number;
-  loading?: boolean;
-  updateState: (newState: Partial<State>) => void;
-}
+import type { State } from "./reducer";
 
-export const defaultState: State = {
-  edition: undefined,
-  loading: false,
-  updateState: (newState?: Partial<State>) => {},
+import { Action } from "./actions";
+
+type Context = {
+  state: State;
+  dispatch: React.Dispatch<Action>;
 };
 
-export const Context = React.createContext<State>(defaultState);
+export const AppContext = React.createContext<Context>({} as Context);

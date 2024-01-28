@@ -1,5 +1,10 @@
-import React, { useState } from "react";
-import { State, Context, defaultState } from "./context";
+import React, { useReducer } from "react";
+
+import type { Action } from "./actions";
+import type { State } from "./reducer";
+
+import { AppContext } from "./context";
+import { initialState, reducer } from "./reducer";
 
 interface Props {
   children: React.ReactNode;
@@ -8,19 +13,14 @@ interface Props {
 export const ContextProvider: React.FunctionComponent<Props> = (
   props: Props
 ): React.JSX.Element => {
-  const [state, setState] = useState(defaultState);
-
-  const updateState = (newState: Partial<State>) => {
-    console.log("updating state:");
-    console.log(state);
-    console.log("new state");
-    console.log(newState);
-    setState((state) => ({ ...state, ...newState }));
-  };
+  const [state, dispatch] = useReducer<React.Reducer<State, Action>>(
+    reducer,
+    initialState
+  );
 
   return (
-    <Context.Provider value={{ ...state, updateState }}>
+    <AppContext.Provider value={{ state, dispatch }}>
       {props.children}
-    </Context.Provider>
+    </AppContext.Provider>
   );
 };

@@ -6,6 +6,7 @@ import {
   Route,
   RouterProvider,
 } from "react-router-dom";
+
 import Navbar from "./components/layout/Navbar";
 import About from "./components/pages/About";
 import Leaderboard from "./components/pages/Leaderboard";
