@@ -15,7 +15,7 @@ export const AppContextProvider: React.FunctionComponent<Props> = (
     console.log(state);
     console.log("new state");
     console.log(newState);
-    setState({ ...state, ...newState });
+    setState((state) => ({ ...state, ...newState }));
   };
 
   return (
