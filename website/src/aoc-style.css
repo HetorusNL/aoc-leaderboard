@@ -31,3 +31,12 @@ em {
 .day-2-color {
   color: #ffff66;
 }
+
+.hyperlink-color {
+  color: #009900;
+}
+
+.hyperlink-color:hover,
+.hyperlink-color:focus {
+  color: #99ff99;
+}

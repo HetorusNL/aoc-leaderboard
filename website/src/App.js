@@ -11,8 +11,9 @@ import Navbar from "./components/layout/Navbar";
 import About from "./components/pages/About";
 import Leaderboard from "./components/pages/Leaderboard";
 import Editions from "./components/pages/Editions";
+import MainPage from "./components/pages/MainPage";
 
-function RootNode() {
+const RootNode = () => {
   return (
     <>
       <Navbar />
@@ -23,11 +24,7 @@ function RootNode() {
       </div>
     </>
   );
-}
-
-function MainPage() {
-  return <div>Click on one of the leaderboards to show them.</div>;
-}
+};
 
 const router = createBrowserRouter(
   createRoutesFromElements(

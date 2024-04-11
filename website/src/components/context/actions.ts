@@ -10,6 +10,18 @@ export const setEdition = (
   payload: { edition },
 });
 
+export const setLatestEdition = (
+  edition: number | undefined
+): {
+  type: "SET_LATEST_EDITION";
+  payload: {
+    edition: number | undefined;
+  };
+} => ({
+  type: "SET_LATEST_EDITION",
+  payload: { edition },
+});
+
 export const setLoading = (
   loading: boolean
 ): {
@@ -24,4 +36,5 @@ export const setLoading = (
 
 export type Action =
   | ReturnType<typeof setEdition>
+  | ReturnType<typeof setLatestEdition>
   | ReturnType<typeof setLoading>;

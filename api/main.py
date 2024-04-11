@@ -3,6 +3,8 @@ import json
 import os
 import requests
 
+# TODO: add route to set the session value
+
 session = os.getenv("session")
 assert session is not None
 

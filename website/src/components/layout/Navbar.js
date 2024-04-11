@@ -6,7 +6,7 @@ import { ReactComponent as Transceive } from "./transceive.svg";
 import { ReactComponent as Idle } from "./idle.svg";
 import "./Sidebar.css";
 import { AppContext } from "../context/context";
-import { setEdition } from "../context/actions";
+import { setEdition, setLatestEdition } from "../context/actions";
 
 const Navbar = () => {
   // switch to hamburger menu if the screen width is less than hamburgerMenuMaxWidth
@@ -19,15 +19,17 @@ const Navbar = () => {
 
   // monitor resize events and store the window width on a resize
   useEffect(() => {
-    // TODO: add page to change editions that modifies the global
-    // after the start of November, set the edition to the current year
+    // calculate the latest edition and set the current and latest edition to this number
+    // after the start of November, set the latest edition to the current year
     // otherwise revert to the last year (already completed) edition
     const currentDate = new Date(Date.now());
-    const currentEdition =
+    const latestEdition =
       currentDate.getUTCMonth() >= 10
         ? currentDate.getUTCFullYear()
         : currentDate.getUTCFullYear() - 1;
-    dispatch(setEdition(currentEdition));
+    dispatch(setLatestEdition(latestEdition));
+    // TODO: check the url for an edition, if it's present set the edition to that value
+    dispatch(setEdition(latestEdition));
     const handleResizeWindow = () =>
       setUseHamburgerMenu(window.innerWidth < hamburgerMenuMaxWidth);
     window.addEventListener("resize", handleResizeWindow);
