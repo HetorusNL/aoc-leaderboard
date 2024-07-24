@@ -3,10 +3,7 @@ import json
 import os
 import requests
 
-# TODO: add route to set the session value
-
-session = os.getenv("session")
-assert session is not None
+session: str = os.getenv("session", "no-session-key-configured")
 
 api = Flask(__name__)
 
@@ -46,6 +43,14 @@ def clear_cache():
     print("clearing cache...")
     cache.clear()
     print("cache cleared!")
+    return jsonify({"result": "success"})
+
+
+@api.route("/admin/session/<string:token>")
+def session_token(token: str):
+    print(f"setting session token to {token}")
+    global session
+    session = token  # store the token in the global session variable
     return jsonify({"result": "success"})
 
 
