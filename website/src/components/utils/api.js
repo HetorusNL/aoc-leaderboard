@@ -10,3 +10,11 @@ export const apiLeaderboard = async (edition, leaderboard) => {
 export const apiClearCache = async () => {
   return await axios.get(`${API_ENDPOINT}/clear-cache`);
 };
+
+export const apiGetSessionToken = async (token) => {
+  return await axios.get(`${API_ENDPOINT}/admin/session/get`);
+};
+
+export const apiSetSessionToken = async (token) => {
+  return await axios.get(`${API_ENDPOINT}/admin/session/set/${token}`);
+};
