@@ -42,6 +42,7 @@ const Navbar = () => {
     { to: "/editions", name: "Editions" },
     { to: `/${state.edition}/1117050`, name: "Messed Up" },
     { to: `/${state.edition}/782191`, name: "Demcon" },
+    { to: "/admin", name: "Admin" },
     { to: "/about", name: "About" },
   ];
 

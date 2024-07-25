@@ -1,4 +1,5 @@
-import React, { Fragment, useContext, useEffect, useState } from "react";
+import { Fragment, useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import packageJson from "../../../package.json";
 
 import { apiClearCache } from "../utils/api";
@@ -27,6 +28,7 @@ const About = () => {
       dispatch(setLoading(false));
     } catch {
       setClearCacheResult("failure");
+      dispatch(setLoading(false));
     }
   };
 
@@ -36,6 +38,16 @@ const About = () => {
       <p>
         This website shows the Advent of Code Leaderboards for the Messed Up and
         Demcon private leaderboards.
+      </p>
+      <p>
+        For the source code of this website (and API) visit:
+        <br />
+        <Link
+          to="https://github.com/HetorusNL/aoc-leaderboard"
+          className="hyperlink-color"
+        >
+          https://github.com/HetorusNL/aoc-leaderboard
+        </Link>
       </p>
       <br />
       <p>

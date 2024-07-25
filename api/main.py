@@ -46,7 +46,13 @@ def clear_cache():
     return jsonify({"result": "success"})
 
 
-@api.route("/admin/session/<string:token>")
+@api.route("/admin/session/get")
+def session_token_get():
+    print(f"returning session token {session}")
+    return jsonify({"session": session})
+
+
+@api.route("/admin/session/set/<string:token>")
 def session_token(token: str):
     print(f"setting session token to {token}")
     global session
