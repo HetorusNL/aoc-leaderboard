@@ -11,9 +11,8 @@ const Leaderboard = () => {
   const edition = params.edition;
   const leaderboard = params.leaderboard;
   const [data, setData] = useState(null);
+  const [numDays, setNumDays] = useState(25);
   const { state, dispatch } = useContext(AppContext);
-
-  const NUM_DAYS = 25;
 
   useEffect(() => {
     console.log("firing useEffect");
@@ -25,7 +24,9 @@ const Leaderboard = () => {
       if (apiData.data == null) {
         return;
       }
+      const num_days = apiData.data.num_days;
       const aocData = apiData.data.members;
+      setNumDays(num_days);
       setData(aocData);
     };
     fetchData();
@@ -46,7 +47,7 @@ const Leaderboard = () => {
 
   const dayHeaders = () => {
     const rows = [];
-    for (let i = 0; i < NUM_DAYS; i++) {
+    for (let i = 0; i < numDays; i++) {
       rows.push(
         <th key={i}>
           <nobr>Day {i + 1}</nobr>
@@ -58,7 +59,7 @@ const Leaderboard = () => {
 
   const dayRows = (levels) => {
     const rows = [];
-    for (let i = 0; i < NUM_DAYS; i++) {
+    for (let i = 0; i < numDays; i++) {
       const day = i + 1;
       const level = levels[`${day}`];
       if (level === undefined) {
