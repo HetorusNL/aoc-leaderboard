@@ -39,8 +39,9 @@ const Leaderboard = () => {
       return [key, value];
     });
     // sort the array based on the local_score of the user
+    // second - first, for descending order
     items.sort((first, second) => {
-      return first[1].local_score < second[1].local_score;
+      return second[1].local_score - first[1].local_score;
     });
     return items;
   };
