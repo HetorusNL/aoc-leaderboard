@@ -13,10 +13,7 @@ interface Props {
 export const ContextProvider: React.FunctionComponent<Props> = (
   props: Props
 ): React.JSX.Element => {
-  const [state, dispatch] = useReducer<React.Reducer<State, Action>>(
-    reducer,
-    initialState
-  );
+  const [state, dispatch] = useReducer<State, [Action]>(reducer, initialState);
 
   return (
     <AppContext.Provider value={{ state, dispatch }}>

@@ -2,8 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import Menu from "react-burger-menu/lib/menus/slide";
 import { Link } from "react-router-dom";
 
-import { ReactComponent as Transceive } from "./transceive.svg";
-import { ReactComponent as Idle } from "./idle.svg";
+import Transceive from "./transceive.svg?react";
+import Idle from "./idle.svg?react";
 import "./Sidebar.css";
 import { AppContext } from "../context/context";
 import { setEdition, setLatestEdition } from "../context/actions";

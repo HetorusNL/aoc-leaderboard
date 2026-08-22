@@ -1,14 +1,12 @@
-FROM node:20-bookworm AS builder
+FROM node:24-alpine AS builder
 
 # add the website files to the docker
 COPY website/ /code
 
 # build the project
 RUN cd /code && \
-    corepack enable && \
-    yarn set version stable && \
-    yarn install && \
-    yarn build
+    npm install && \
+    npm run build
 
 # use the caddy image as base to host the website
 FROM caddy
@@ -19,6 +17,7 @@ COPY --from=builder /code/build /srv/website
 COPY gha/Caddyfile /etc/caddy/Caddyfile
 
 # add/update the container labels
+ARG VCS_REF
 LABEL org.label-schema.vcs-ref=$VCS_REF
 LABEL org.label-schema.vcs-url=https://github.com/HetorusNL/aoc-leaderboard
 LABEL org.opencontainers.image.authors=tim@hetorus.nl

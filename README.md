@@ -40,84 +40,38 @@ The current website is hosted at: https://aoc.hetorus.nl
 
 Run the website using the docker container mentioned above.
 
-### Configuring yarn
+### Configuring npm
 
 ```bash
-# make sure to install nodejs (e.g. `nodejs-lts-iron`) and npm
-
-# if any of the below commands fail on permission errors, prefix them with sudo
-
-# remove yarn if present on the system
-sudo apt remove yarn
-
-# make sure that node.js >= 16.10 is installed
-
-# enable corepack
-corepack enable
-
-# update to the latest version
-yarn set version stable
-
 # install the dependencies of the project
-yarn install
+npm install
 ```
-
-### Adding typescript to existing javascript project
-
-Add the necessary typescript packages:
-
-```bash
-yarn add typescript @types/node @types/react @types/react-dom @types/jest
-```
-
-Make sure the `tsc` command is added to the `package.json`, and run the following to generate a default `tsconfig.json`:
-
-```bash
-yarn tsc --init
-```
-
-Make sure the following is set `tsconfig.json`:
-
-```json
-"jsx": "react"
-```
-
-If there are errors during `yarn start`, restart the editor to (re)load the typescript configuration.
 
 ## Scripts
 
 ### Run the development server
 
 Run the following command to run the dev server:  
-`yarn start`  
-This starts the development server on `localhost:3000`
+`npm run dev`  
+This starts the development server on `localhost:5173`
 
 ### Run a build (without incrementing version number)
 
 Run the following command to build the application:  
-`yarn build`  
+`npm run build`  
 This updates the version number (if changed in `package.json`) and builds the application
 
 ### Increment the version number of the website
 
-The Semantic Versioning, also known as "semver", is used:  
-Version: `major.minor.patch`  
-Run one of the following commands:
-
-- `yarn release-patch` // increments the `patch` number of the version
-- `yarn release-minor` // increments the `minor` number of the version
-- `yarn release-major` // increments the `major` number of the version
-
-After creating the new version, add the changed files and create a commit, e.g.:  
-`git add .`  
-`git commit -m "released vX.Y.Z"`
-
-After creating a commit, make sure to create a tag with matching version number (e.g. matching `v${npm_package_version}`), and push this to the repository, e.g:  
-`git push`  
-`git tag -a vX.Y.Z -m "vX.Y.Z"`  
-`git push --tags`  
-This causes the CI/CD to create a tagged docker image for both the API and the website with this version number.
+the Semantic Versioning, also known as "semver", is used:  
+version: `major.minor.patch`  
+run one of the following commands:  
+`npm run release-patch` // increments the `patch` number of the version  
+`npm run release-minor` // increments the `minor` number of the version  
+`npm run release-major` // increments the `major` number of the version  
+all these three commands also create a git commit and git tag with the major.minor.patch version number, and runs the build to create a production build, and add the changes (in e.g. meta.json version number) to the last version commit.  
+these three commands also mention how to perform a push to the master branch on github and push the tags
 
 ## License
 
-MIT License, Copyright (c) 2024 Tim Klein Nijenhuis <tim@hetorus.nl>
+MIT License, Copyright (c) 2026 Tim Klein Nijenhuis <tim@hetorus.nl>

@@ -1,36 +1,29 @@
 {
   "name": "aoc-leaderboard",
-  "packageManager": "yarn@4.3.1",
   "version": "1.6.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^5.14.1",
-    "@testing-library/react": "^13.0.0",
-    "@testing-library/user-event": "^13.2.1",
-    "@types/jest": "^29.5.11",
-    "@types/node": "^20.11.6",
-    "@types/react": "^18.2.48",
-    "@types/react-dom": "^18.2.18",
-    "axios": "^1.6.3",
-    "react": "^18.2.0",
-    "react-burger-menu": "^3.0.9",
-    "react-dom": "^18.2.0",
-    "react-router-dom": "^6.21.0",
-    "react-scripts": "5.0.1",
-    "typescript": "^5.3.3",
-    "web-vitals": "^2.1.0"
+    "@types/react": "^19.2.18",
+    "@types/react-burger-menu": "^2.8.7",
+    "axios": "^1.19.0",
+    "react": "^19.2.8",
+    "react-burger-menu": "^3.1.0",
+    "react-dom": "^19.2.8",
+    "react-router-dom": "^7.18.2",
+    "typescript": "^7.0.2",
+    "vite-plugin-svgr": "^5.2.0",
+    "web-vitals": "^6.1.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "prebuild": "yarn generate-build-version",
-    "build": "yarn prebuild && react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
+    "dev": "vite",
+    "prebuild": "node generate-build-version",
+    "build": "npm run prebuild && vite build",
     "generate-build-version": "node generate-build-version",
-    "release-patch": "yarn version patch && yarn postversion",
-    "release-minor": "yarn version minor && yarn postversion",
-    "release-major": "yarn version major && yarn postversion",
-    "postversion": "yarn build",
+    "release-patch": "npm version patch && npm run postversion",
+    "release-minor": "npm version minor && npm run postversion",
+    "release-major": "npm version major && npm run postversion",
+    "postversion": "npm run build && npm run git-script",
+    "git-script": "node git-script",
     "tsc": "tsc"
   },
   "eslintConfig": {
@@ -50,5 +43,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^6.1.0",
+    "vite": "^8.2.2"
   }
 }
